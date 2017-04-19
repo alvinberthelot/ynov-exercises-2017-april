@@ -1,7 +1,7 @@
 let chalk = require('chalk');
 let Rx = require('rxjs');
 
-var dataObservable = Rx.Observable.create(function(observer){
+var dataObservable = Rx.Observable.create(function(observer) {
   observer.next(3);
   observer.next(5);
   observer.next(6);
@@ -21,9 +21,15 @@ console.log('\n');
 
 console.log('OBSERVATEUR 2\n');
 dataObservable
-  .filter(val => typeof val == 'number')
-  .reduce((acc, item) => acc + item, 0)
-  .subscribe(value => {
-    console.log('Observateur 2 : ' + value);
-  })
+  // .filter(val => typeof val == 'number')
+  .reduce((acc, item) => {
+    if (typeof item !== 'number') {
+      throw(new Error('ceci n\'est pas un nombre !!!'));
+    }
+    return acc + item
+  }, 0)
+  .subscribe(
+    value => { console.log('Observateur 2 : ' + value)},
+    error => {console.log(error)},
+    () => { console.log('Cette donnée a été calculée à partir de 4 chiffres')})
 console.log('\n');
