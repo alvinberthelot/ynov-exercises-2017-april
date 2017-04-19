@@ -8,4 +8,6 @@ function sum(data) {
   .reduce((acc, item) => acc + item, 0);
 }
 
-console.log(chalk.green(sum(data)));
+module.exports = {
+  sum: sum
+}
