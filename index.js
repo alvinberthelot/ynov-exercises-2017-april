@@ -9,7 +9,7 @@ function sum(data) {
  }
 
 var promise = new Promise(function (fulfill, reject) {
-  setTimeout(fulfill, 6000, sum(data))
+  setTimeout(fulfill, 6000, data)
 })
 
-promise.then(console.log);
+promise.then((data) => { console.log(sum(data)) });
